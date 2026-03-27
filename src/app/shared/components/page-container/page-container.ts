@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CardModule } from 'primeng/card';
 
 @Component({
@@ -7,4 +7,6 @@ import { CardModule } from 'primeng/card';
   templateUrl: './page-container.html',
   styleUrl: './page-container.css',
 })
-export class PageContainer {}
+export class PageContainer {
+  page = input.required<string>();
+}
