@@ -1,2 +1,15 @@
 <router-outlet></router-outlet>
 <p-toast />
+<p-dialog
+  [visible]="loadingService.loading()"
+  [modal]="true"
+  [closeOnEscape]="false"
+  [closable]="false"
+  [position]="'center'"
+  [resizable]="false"
+  [draggable]="false"
+  [scrollLeft]="false"
+  [style]="{ width: '200px', height: '200px', textAlign: 'center' }"
+>
+  <p-progress-spinner [style]="{ width: '100px', height: '100px' }" />
+</p-dialog>
