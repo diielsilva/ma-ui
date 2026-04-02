@@ -7,7 +7,7 @@ export const authorizationGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (!sessionService.hasSession()) {
-    router.navigateByUrl('/login');
+    router.navigateByUrl('');
   }
 
   return sessionService.hasSession();
