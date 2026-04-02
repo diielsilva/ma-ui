@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService, ToastMessageOptions } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DatePickerModule } from 'primeng/datepicker';
@@ -31,10 +32,12 @@ import { positiveIntegerSequence } from '../../validators/positive-integer-seque
   styleUrl: './register-user-page.css',
 })
 export class RegisterUserPage {
-  protected form: FormGroup;
-  protected genders = ['Masculino', 'Feminino'];
   private messageService = inject(MessageService);
   private userService = inject(UserService);
+  private router = inject(Router);
+
+  protected form: FormGroup;
+  protected genders = ['Masculino', 'Feminino'];
 
   constructor() {
     this.form = new FormGroup({
@@ -98,6 +101,8 @@ export class RegisterUserPage {
             };
 
             this.messageService.add(toast);
+
+            this.router.navigateByUrl('/users/login');
           },
         });
     }
