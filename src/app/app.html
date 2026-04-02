@@ -1,5 +1,15 @@
+@if (sessionService.hasSession() && sessionService.isAnAdminSession()) {
+  <p-menubar class="w-md sm:w-xl mt-2 mb-2" [model]="adminNavbarItems()"></p-menubar>
+} @else if (sessionService.hasSession()) {
+  <p-menubar class="w-md sm:w-xl mt-2 mb-2" [model]="userNavbarItems()"></p-menubar>
+} @else {
+  <p-menubar class="w-md sm:w-xl mt-2 mb-2" [model]="defaultNavbarItems()"></p-menubar>
+}
+
 <router-outlet></router-outlet>
+
 <p-toast />
+
 <p-dialog
   [visible]="loadingService.loading()"
   [modal]="true"
