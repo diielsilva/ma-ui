@@ -11,9 +11,11 @@ export const JwtInterceptor: HttpInterceptorFn = (req, next) => {
   if (sessionService.hasSession()) {
     const jwt = sessionService.sessionToken;
 
-    req.headers.append('Authorization', `Bearer ${jwt}`);
+    const authenticatedRequest = req.clone({
+      headers: req.headers.append('Authorization', `Bearer ${jwt}`),
+    });
 
-    return next(req).pipe(
+    return next(authenticatedRequest).pipe(
       catchError((error: HttpErrorResponse) => {
         const shouldDestroySession = error.status === 401 || error.status === 403;
 
