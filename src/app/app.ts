@@ -19,9 +19,17 @@ export class App {
   protected sessionService = inject(SessionService);
   protected router = inject(Router);
 
-  protected adminNavbarItems = signal<MenuItem[]>([{ label: 'Admin' }]);
+  protected adminNavbarItems = signal<MenuItem[]>([
+    { label: 'Pedidos', icon: 'pi pi-ticket', items: [] },
+  ]);
 
-  protected userNavbarItems = signal<MenuItem[]>([{ label: 'User' }]);
+  protected userNavbarItems = signal<MenuItem[]>([
+    {
+      label: 'Pedidos',
+      icon: 'pi pi-ticket',
+      items: [{ label: 'Registrar', routerLink: '/orders/register' }],
+    },
+  ]);
 
   protected defaultNavbarItems = signal<MenuItem[]>([
     { label: 'Entrar', icon: 'pi pi-sign-in', routerLink: '/users/login' },

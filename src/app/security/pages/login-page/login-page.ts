@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -26,7 +26,7 @@ import { SessionService } from '../../services/session-service';
   templateUrl: './login-page.html',
   styleUrl: './login-page.css',
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   protected form!: FormGroup;
   private loginService = inject(LoginService);
   private sessionService = inject(SessionService);
@@ -39,10 +39,6 @@ export class LoginPage implements OnInit {
         validators: [Validators.required, Validators.minLength(5)],
       }),
     });
-  }
-
-  public ngOnInit() {
-    this.sessionService.destroy();
   }
 
   protected onSubmit() {
@@ -58,11 +54,8 @@ export class LoginPage implements OnInit {
         .subscribe({
           next: (response: LoginResponseData) => {
             this.sessionService.create(response);
-            console.log(
-              this.sessionService.hasSession(),
-              this.sessionService.isAnAdminSession(),
-              response,
-            );
+
+            this.router.navigateByUrl('/orders/register');
           },
         });
     }
