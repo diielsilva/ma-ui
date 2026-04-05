@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { RegisterOrderPage } from './order/pages/register-order-page/register-order-page';
+import { authorizationGuard } from './security/guards/authorization-guard';
 import { sessionDestroyerGuard } from './security/guards/session-destroyer-guard';
 import { LoginPage } from './security/pages/login-page/login-page';
 import { RegisterUserPage } from './user/pages/register-user-page/register-user-page';
@@ -11,5 +13,10 @@ export const routes: Routes = [
       { path: 'register', component: RegisterUserPage, canActivate: [sessionDestroyerGuard] },
       { path: 'login', component: LoginPage, canActivate: [sessionDestroyerGuard] },
     ],
+  },
+  {
+    path: 'orders',
+    children: [{ path: 'register', component: RegisterOrderPage }],
+    canActivate: [authorizationGuard],
   },
 ];

@@ -1,0 +1,46 @@
+<app-page-container [page]="'Realizar Pedido de Inscrição'">
+  <form [formGroup]="form" (ngSubmit)="create()">
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select
+          class="w-full"
+          formControlName="paymentMethod"
+          [options]="paymentMethods"
+          id="payment-method"
+        />
+        <label for="payment-method">Forma de Pagamento</label>
+      </p-iftalabel>
+
+      @let paymentMethod = form.get('paymentMethod');
+      @let isPaymentMethodFieldInvalid = paymentMethod?.touched && paymentMethod?.invalid;
+
+      @if (isPaymentMethodFieldInvalid) {
+        @let isMissingPaymentMethod = paymentMethod?.errors?.['required'];
+
+        @if (isMissingPaymentMethod) {
+          <app-form-error-message [message]="'O método de pagamento não pode ser nulo'" />
+        }
+      }
+    </div>
+
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select class="w-full" formControlName="value" [options]="orderValues" id="value" />
+        <label for="value">R$ Valor</label>
+      </p-iftalabel>
+
+      @let value = form.get('value');
+      @let isValueFieldInvalid = value?.touched && value?.invalid;
+
+      @if (isValueFieldInvalid) {
+        @let isMissingValue = value?.errors?.['required'];
+
+        @if (isMissingValue) {
+          <app-form-error-message [message]="'O valor a ser pago não pode ser nulo'" />
+        }
+      }
+    </div>
+
+    <button [disabled]="form.invalid" type="submit" class="w-full" pButton>Realizar</button>
+  </form>
+</app-page-container>
