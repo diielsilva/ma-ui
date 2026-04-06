@@ -1,0 +1,28 @@
+<p-panel class="mb-2">
+  <ul>
+    <li>
+      <span class="font-semibold mr-2">Pagar Com:</span
+      >{{ data().order.paymentMethod | paymentMethod }}
+    </li>
+    <li>
+      <span class="font-semibold mr-2">Status:</span
+      ><span
+        [ngClass]="{
+          'text-red-500': data().order.status === 'CANCELLED',
+          'text-yellow-500': data().order.status === 'PENDING',
+          'text-green-500': data().order.status === 'CONFIRMED',
+        }"
+        >{{ data().order.status | orderStatus }}</span
+      >
+    </li>
+    <li>
+      <span class="font-semibold mr-2">Expira Em:</span
+      >{{ data().order.dueDate | date: 'dd/MM/yyyy hh:mm' }}
+    </li>
+  </ul>
+  <ng-template #footer>
+    <button class="text-right" type="button" pButton [disabled]="data().isBtnDisabled">
+      {{ data().btnText }}
+    </button>
+  </ng-template>
+</p-panel>
