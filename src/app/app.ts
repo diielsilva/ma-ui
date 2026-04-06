@@ -20,14 +20,24 @@ export class App {
   protected router = inject(Router);
 
   protected adminNavbarItems = signal<MenuItem[]>([
-    { label: 'Pedidos', icon: 'pi pi-ticket', items: [] },
+    {
+      label: 'Pedidos',
+      icon: 'pi pi-ticket',
+      items: [
+        { label: 'Registrar', routerLink: '/orders/register' },
+        { label: 'Listar', routerLink: '/orders' },
+      ],
+    },
   ]);
 
   protected userNavbarItems = signal<MenuItem[]>([
     {
       label: 'Pedidos',
       icon: 'pi pi-ticket',
-      items: [{ label: 'Registrar', routerLink: '/orders/register' }],
+      items: [
+        { label: 'Registrar', routerLink: '/orders/register' },
+        { label: 'Listar', routerLink: '/orders' },
+      ],
     },
   ]);
 
