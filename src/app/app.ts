@@ -1,48 +1,21 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { MenuItem } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { MenubarModule } from 'primeng/menubar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { SessionService } from './security/services/session-service';
+import { Header } from './shared/components/header/header';
 import { LoadingService } from './shared/services/loading-service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToastModule, DialogModule, ProgressSpinnerModule, MenubarModule],
+  imports: [RouterOutlet, ToastModule, DialogModule, ProgressSpinnerModule, MenubarModule, Header],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
-  protected loadingService = inject(LoadingService);
-  protected sessionService = inject(SessionService);
-  protected router = inject(Router);
-
-  protected adminNavbarItems = signal<MenuItem[]>([
-    {
-      label: 'Pedidos',
-      icon: 'pi pi-ticket',
-      items: [
-        { label: 'Registrar', routerLink: '/orders/register' },
-        { label: 'Listar', routerLink: '/orders' },
-      ],
-    },
-  ]);
-
-  protected userNavbarItems = signal<MenuItem[]>([
-    {
-      label: 'Pedidos',
-      icon: 'pi pi-ticket',
-      items: [
-        { label: 'Registrar', routerLink: '/orders/register' },
-        { label: 'Listar', routerLink: '/orders' },
-      ],
-    },
-  ]);
-
-  protected defaultNavbarItems = signal<MenuItem[]>([
-    { label: 'Entrar', icon: 'pi pi-sign-in', routerLink: '/users/login' },
-    { label: 'Registre-se', icon: 'pi pi-user-plus', routerLink: '/users/register' },
-  ]);
+  protected loadingService: LoadingService = inject(LoadingService);
+  protected sessionService: SessionService = inject(SessionService);
+  protected router: Router = inject(Router);
 }

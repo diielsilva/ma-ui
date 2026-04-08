@@ -1,10 +1,7 @@
-@if (sessionService.hasSession() && sessionService.isAnAdminSession()) {
-  <p-menubar class="w-md sm:w-xl mt-2 mb-2" [model]="adminNavbarItems()"></p-menubar>
-} @else if (sessionService.hasSession()) {
-  <p-menubar class="w-md sm:w-xl mt-2 mb-2" [model]="userNavbarItems()"></p-menubar>
-} @else {
-  <p-menubar class="w-md sm:w-xl mt-2 mb-2" [model]="defaultNavbarItems()"></p-menubar>
-}
+<app-header
+  [hasSession]="sessionService.hasSession()"
+  [isAnAdminSession]="sessionService.isAnAdminSession()"
+/>
 
 <router-outlet></router-outlet>
 
