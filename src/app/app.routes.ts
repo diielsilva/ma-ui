@@ -22,7 +22,7 @@ export const routes: Routes = [
     path: 'orders',
     children: [
       { path: '', pathMatch: 'full', component: ListOrderPage },
-      { path: 'register', component: RegisterOrderPage },
+      { path: 'create', component: RegisterOrderPage },
     ],
     canActivate: [authorizationGuard],
   },

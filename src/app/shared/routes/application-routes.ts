@@ -5,5 +5,6 @@ export const appRoutes = {
   },
   orders: {
     create: '/orders/create',
+    list: '/orders',
   },
 };
