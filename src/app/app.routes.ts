@@ -7,7 +7,7 @@ import { LoginPage } from './security/pages/login-page/login-page';
 import { CreateUserPage } from './user/pages/create-user-page/create-user-page';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'users/login' },
+  { path: '', pathMatch: 'full', redirectTo: 'security/login' },
   {
     path: 'users',
     children: [
