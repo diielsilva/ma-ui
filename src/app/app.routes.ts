@@ -4,15 +4,18 @@ import { RegisterOrderPage } from './order/pages/register-order-page/register-or
 import { authorizationGuard } from './security/guards/authorization-guard';
 import { sessionDestroyerGuard } from './security/guards/session-destroyer-guard';
 import { LoginPage } from './security/pages/login-page/login-page';
-import { RegisterUserPage } from './user/pages/register-user-page/register-user-page';
+import { CreateUserPage } from './user/pages/create-user-page/create-user-page';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'users/login' },
   {
     path: 'users',
     children: [
-      { path: 'register', component: RegisterUserPage, canActivate: [sessionDestroyerGuard] },
-      { path: 'login', component: LoginPage, canActivate: [sessionDestroyerGuard] },
+      {
+        path: 'create',
+        component: CreateUserPage,
+        canActivate: [sessionDestroyerGuard],
+      },
     ],
   },
   {
@@ -22,5 +25,10 @@ export const routes: Routes = [
       { path: 'register', component: RegisterOrderPage },
     ],
     canActivate: [authorizationGuard],
+  },
+  {
+    path: 'security/login',
+    component: LoginPage,
+    canActivate: [sessionDestroyerGuard],
   },
 ];
