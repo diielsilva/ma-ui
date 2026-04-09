@@ -1,0 +1,9 @@
+@if (field().touched && field().invalid) {
+  @for (error of errors(); track $index) {
+    @if (field().errors?.[error]) {
+      <p-message class="mt-2 mb-2" [icon]="'pi pi-times-circle'" severity="error">
+        {{ messages()[$index] }}
+      </p-message>
+    }
+  }
+}
