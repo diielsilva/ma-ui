@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export function positiveIntegerSequence(): ValidatorFn {
+export function unsignedIntegerSequence(): ValidatorFn {
   return (control: AbstractControl<string>): ValidationErrors | null => {
     const value = control.value;
 
@@ -10,12 +10,12 @@ export function positiveIntegerSequence(): ValidatorFn {
 
       if (isNotAnInteger) {
         return {
-          positiveIntegerSequence: { value: 'O campo selecionado aceita apenas números' },
+          unsignedIntegerSequence: { value: 'O campo selecionado aceita apenas números' },
         };
       }
 
       if (integer < 0) {
-        return { positiveIntegerSequence: { value: 'Apenas números positivos são aceitos' } };
+        return { unsignedIntegerSequence: { value: 'Apenas números positivos são aceitos' } };
       }
     }
 
