@@ -18,4 +18,8 @@ export class OrderService {
   public findAll() {
     return this.httpClient.get<Order[]>(this.url);
   }
+
+  search(cpf: string) {
+    return this.httpClient.get<Order[]>(`${this.url}/search?cpf=${cpf}`);
+  }
 }

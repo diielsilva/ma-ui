@@ -33,6 +33,7 @@ export class Header {
       items: [
         { label: 'Criar Pedido', routerLink: appRoutes.orders.create },
         { label: 'Meus Pedidos', routerLink: appRoutes.orders.list },
+        { label: 'Pesquisar Pedidos', routerLink: appRoutes.orders.search },
       ],
     },
     {
