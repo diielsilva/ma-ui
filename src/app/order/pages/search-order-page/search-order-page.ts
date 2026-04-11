@@ -1,11 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MessageService, ToastMessageOptions } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageModule } from 'primeng/message';
 import { take } from 'rxjs';
+import { EnrollmentService } from '../../../enrollment/services/enrollment-service';
 import { FormFieldErrorMessage } from '../../../shared/components/form-field-error-message/form-field-error-message';
 import { PageContainer } from '../../../shared/components/page-container/page-container';
 import { unsignedIntegerSequence } from '../../../user/validators/unsigned-integer-sequence';
@@ -38,6 +40,8 @@ import { SearchOrderPageState } from './search-order-page-state';
 export class SearchByUserCpfPage {
   private formBuilder = inject(NonNullableFormBuilder);
   private orderService = inject(OrderService);
+  private enrollmentService = inject(EnrollmentService);
+  private messageService = inject(MessageService);
 
   protected state = signal(SearchOrderPageState.INITIAL);
   protected cards = signal<OrderCardData[]>([]);
@@ -93,5 +97,22 @@ export class SearchByUserCpfPage {
     }
 
     this.state.set(SearchOrderPageState.LOADED);
+  }
+
+  protected confirmOrder(id: number) {
+    this.enrollmentService
+      .create(id)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          const toast: ToastMessageOptions = {
+            severity: 'success',
+            summary: 'Pedido de inscrição confirmado com sucesso',
+            sticky: true,
+          };
+
+          this.messageService.add(toast);
+        },
+      });
   }
 }

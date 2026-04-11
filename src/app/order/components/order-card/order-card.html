@@ -19,9 +19,19 @@
       <span class="font-semibold mr-2">Expira Em:</span
       >{{ data().order.dueDate | date: 'dd/MM/yyyy hh:mm' }}
     </li>
+    <li>
+      <span class="font-semibold mr-2">Valor:</span>
+      R${{ data().order.value }}
+    </li>
   </ul>
   <ng-template #footer>
-    <button class="text-right" type="button" pButton [disabled]="data().isBtnDisabled">
+    <button
+      class="text-right"
+      (click)="onBtnClick.emit(data().order.id)"
+      type="button"
+      pButton
+      [disabled]="data().isBtnDisabled"
+    >
       {{ data().btnText }}
     </button>
   </ng-template>

@@ -19,7 +19,7 @@
     <div class="mt-4">
       @if (cards().length > 0) {
         @for (data of cards(); track $index) {
-          <app-order-card [data]="data" />
+          <app-order-card [data]="data" (onBtnClick)="confirmOrder($event)" />
         }
       } @else {
         <p-message severity="info">O usuário não possui pedidos de inscrição</p-message>
