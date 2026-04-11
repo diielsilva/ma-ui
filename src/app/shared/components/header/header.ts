@@ -19,6 +19,11 @@ export class Header {
         { label: 'Meus Pedidos', routerLink: appRoutes.orders.list },
       ],
     },
+    {
+      label: 'Sair',
+      icon: 'pi pi-sign-out',
+      routerLink: appRoutes.login,
+    },
   ];
 
   protected adminSessionNavbarItems: MenuItem[] = [
@@ -28,7 +33,13 @@ export class Header {
       items: [
         { label: 'Criar Pedido', routerLink: appRoutes.orders.create },
         { label: 'Meus Pedidos', routerLink: appRoutes.orders.list },
+        { label: 'Pesquisar Pedidos', routerLink: appRoutes.orders.search },
       ],
+    },
+    {
+      label: 'Sair',
+      icon: 'pi pi-sign-out',
+      routerLink: appRoutes.login,
     },
   ];
 

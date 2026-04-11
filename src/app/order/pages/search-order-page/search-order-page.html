@@ -1,0 +1,29 @@
+<app-page-container [page]="'Pesquisar Pedidos de Incrição'">
+  <form [formGroup]="form" (ngSubmit)="search()">
+    <div class="mb-2">
+      <p-iftalabel>
+        <input class="w-full" type="text" name="" pInputText formControlName="cpf" id="cpf" />
+        <label for="cpf">CPF</label>
+      </p-iftalabel>
+
+      <app-form-field-error-message
+        [field]="form.controls.cpf"
+        [errors]="formErrors().cpf.errors"
+        [messages]="formErrors().cpf.messages"
+      />
+    </div>
+    <button class="w-full" type="submit" [disabled]="form.invalid" pButton>Pesquisar</button>
+  </form>
+
+  @if (state() === 1) {
+    <div class="mt-4">
+      @if (cards().length > 0) {
+        @for (data of cards(); track $index) {
+          <app-order-card [data]="data" (onBtnClick)="confirmOrder($event)" />
+        }
+      } @else {
+        <p-message severity="info">O usuário não possui pedidos de inscrição</p-message>
+      }
+    </div>
+  }
+</app-page-container>
