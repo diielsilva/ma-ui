@@ -3,7 +3,18 @@
     <span>Você não possui pedidos</span>
   } @else if (state() === 1 && orders().length > 0) {
     @for (order of orders(); track $index) {
-      <app-order-card [data]="order" />
+      <app-order-card [data]="order" (onBtnClick)="handleOrderCardClick($event)" />
     }
   }
 </app-page-container>
+<p-dialog [visible]="shouldDisplayPixDetailModal()" [modal]="true" (onHide)="hidePixDetail()">
+  <img class="max-w-75 rounded-sm" src="{{ pixDetail()?.qrCodeUrl }}" title="QR Code Image" />
+  <button
+    type="button"
+    pButton
+    class="w-full mt-2"
+    [cdkCopyToClipboard]="pixDetail()?.copyAndPasteCode!"
+  >
+    Copiar Código
+  </button>
+</p-dialog>
