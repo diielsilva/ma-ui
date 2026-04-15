@@ -1,4 +1,4 @@
-export const userCreationFormErrors = {
+export const CREATE_USER_FORM_ERRORS = Object.freeze({
   name: {
     errors: ['required', 'minlength'],
     messages: ['O nome não pode ser nulo', 'O nome deve conter ao menos 3 caracteres'],
@@ -34,7 +34,10 @@ export const userCreationFormErrors = {
     messages: ['O sexo não pode ser nulo'],
   },
   birthDate: {
-    errors: ['required'],
-    messages: ['A data de nascimento não pode ser nula'],
+    errors: ['required', 'hasAgeToEnroll'],
+    messages: [
+      'A data de nascimento não pode ser nula',
+      'O usuário deve ter uma idade entre 12 e 120 anos',
+    ],
   },
-};
+});
