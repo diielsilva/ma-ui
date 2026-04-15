@@ -1,5 +1,7 @@
-export const appRoutes = {
-  login: '/security/login',
+export const ROUTES = Object.freeze({
+  security: {
+    login: '/security/login',
+  },
   users: {
     create: '/users/create',
   },
@@ -8,4 +10,4 @@ export const appRoutes = {
     list: '/orders',
     search: '/orders/search',
   },
-};
+});

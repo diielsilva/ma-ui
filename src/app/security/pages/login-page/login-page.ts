@@ -7,7 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { take } from 'rxjs';
 import { FormErrorMessage } from '../../../shared/components/form-error-message/form-error-message';
 import { PageContainer } from '../../../shared/components/page-container/page-container';
-import { appRoutes } from '../../../shared/routes/application-routes';
+import { ROUTES } from '../../../shared/routes/routes';
 import { LoginRequestData } from '../../dtos/login-request-data';
 import { LoginResponseData } from '../../dtos/login-response-data';
 import { LoginService } from '../../services/login-service';
@@ -56,7 +56,7 @@ export class LoginPage {
           next: (response: LoginResponseData) => {
             this.sessionService.create(response);
 
-            this.router.navigateByUrl(appRoutes.orders.create);
+            this.router.navigateByUrl(ROUTES.orders.create);
           },
         });
     }

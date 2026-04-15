@@ -11,7 +11,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { take } from 'rxjs';
 import { FormFieldErrorMessage } from '../../../shared/components/form-field-error-message/form-field-error-message';
 import { PageContainer } from '../../../shared/components/page-container/page-container';
-import { appRoutes } from '../../../shared/routes/application-routes';
+import { ROUTES } from '../../../shared/routes/routes';
 import { CREATE_USER_FORM_ERRORS } from '../../constants/create-user-form-errors';
 import { UserService } from '../../services/user-service';
 import { CreateUserForm } from '../../types/create-user-form';
@@ -106,7 +106,7 @@ export class CreateUserPage implements OnInit {
 
             this.messageService.add(successMessage);
 
-            this.router.navigateByUrl(appRoutes.login);
+            this.router.navigateByUrl(ROUTES.login);
           },
         });
     }

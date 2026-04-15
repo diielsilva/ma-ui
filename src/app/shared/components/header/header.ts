@@ -1,7 +1,7 @@
 import { Component, input, InputSignal } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
-import { appRoutes } from '../../routes/application-routes';
+import { ROUTES } from '../../routes/routes';
 
 @Component({
   selector: 'app-header',
@@ -15,14 +15,14 @@ export class Header {
       label: 'Pedidos',
       icon: 'pi pi-ticket',
       items: [
-        { label: 'Criar Pedido', routerLink: appRoutes.orders.create },
-        { label: 'Meus Pedidos', routerLink: appRoutes.orders.list },
+        { label: 'Criar Pedido', routerLink: ROUTES.orders.create },
+        { label: 'Meus Pedidos', routerLink: ROUTES.orders.list },
       ],
     },
     {
       label: 'Sair',
       icon: 'pi pi-sign-out',
-      routerLink: appRoutes.login,
+      routerLink: ROUTES.login,
     },
   ];
 
@@ -31,21 +31,21 @@ export class Header {
       label: 'Pedidos',
       icon: 'pi pi-ticket',
       items: [
-        { label: 'Criar Pedido', routerLink: appRoutes.orders.create },
-        { label: 'Meus Pedidos', routerLink: appRoutes.orders.list },
-        { label: 'Pesquisar Pedidos', routerLink: appRoutes.orders.search },
+        { label: 'Criar Pedido', routerLink: ROUTES.orders.create },
+        { label: 'Meus Pedidos', routerLink: ROUTES.orders.list },
+        { label: 'Pesquisar Pedidos', routerLink: ROUTES.orders.search },
       ],
     },
     {
       label: 'Sair',
       icon: 'pi pi-sign-out',
-      routerLink: appRoutes.login,
+      routerLink: ROUTES.login,
     },
   ];
 
   protected sessionlessNavbarItems: MenuItem[] = [
-    { label: 'Entrar', icon: 'pi pi-sign-in', routerLink: appRoutes.login },
-    { label: 'Cadastre-se', icon: 'pi pi-user-plus', routerLink: appRoutes.users.create },
+    { label: 'Entrar', icon: 'pi pi-sign-in', routerLink: ROUTES.login },
+    { label: 'Cadastre-se', icon: 'pi pi-user-plus', routerLink: ROUTES.users.create },
   ];
 
   public hasSession: InputSignal<boolean> = input.required<boolean>();
