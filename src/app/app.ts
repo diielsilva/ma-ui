@@ -5,12 +5,12 @@ import { MenubarModule } from 'primeng/menubar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { SessionService } from './security/services/session-service';
-import { Header } from './shared/components/header/header';
+import { Navbar } from './shared/components/navbar/navbar';
 import { HttpLoadingService } from './shared/services/http-loading-service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToastModule, DialogModule, ProgressSpinnerModule, MenubarModule, Header],
+  imports: [RouterOutlet, ToastModule, DialogModule, ProgressSpinnerModule, MenubarModule, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
