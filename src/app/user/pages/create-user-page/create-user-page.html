@@ -1,5 +1,5 @@
 <app-page-container page="Cadastro de Usuário">
-  <form [formGroup]="form" (ngSubmit)="create()">
+  <form [formGroup]="createUserForm" (ngSubmit)="createUser()">
     <div class="mb-2">
       <p-iftalabel>
         <input class="w-full" type="text" formControlName="name" pInputText id="name" />
@@ -7,7 +7,7 @@
       </p-iftalabel>
 
       <app-form-field-error-message
-        [field]="form.controls.name"
+        [field]="createUserForm.controls.name"
         [errors]="formErrors().name.errors"
         [messages]="formErrors().name.messages"
       />
@@ -20,7 +20,7 @@
       </p-iftalabel>
 
       <app-form-field-error-message
-        [field]="form.controls.email"
+        [field]="createUserForm.controls.email"
         [errors]="formErrors().email.errors"
         [messages]="formErrors().email.messages"
       />
@@ -33,7 +33,7 @@
       </p-iftalabel>
 
       <app-form-field-error-message
-        [field]="form.controls.password"
+        [field]="createUserForm.controls.password"
         [errors]="formErrors().password.errors"
         [messages]="formErrors().password.messages"
       />
@@ -47,7 +47,7 @@
       </p-iftalabel>
 
       <app-form-field-error-message
-        [field]="form.controls.cpf"
+        [field]="createUserForm.controls.cpf"
         [errors]="formErrors().cpf.errors"
         [messages]="formErrors().cpf.messages"
       />
@@ -60,7 +60,7 @@
         <small class="italic">*O telefone deve conter apenas números.</small>
 
         <app-form-field-error-message
-          [field]="form.controls.phone"
+          [field]="createUserForm.controls.phone"
           [errors]="formErrors().phone.errors"
           [messages]="formErrors().phone.messages"
         />
@@ -69,13 +69,13 @@
 
     <div class="mb-2">
       <p-iftalabel>
-        <p-select class="w-full" formControlName="gender" [options]="genders" id="genders">
-        </p-select>
+        <p-select class="w-full" formControlName="gender" [options]="genders" id="genders" />
+
         <label for="genders">Sexo</label>
       </p-iftalabel>
 
       <app-form-field-error-message
-        [field]="form.controls.gender"
+        [field]="createUserForm.controls.gender"
         [errors]="formErrors().gender.errors"
         [messages]="formErrors().gender.messages"
       />
@@ -93,7 +93,7 @@
       </p-iftalabel>
 
       <app-form-field-error-message
-        [field]="form.controls.birthDate"
+        [field]="createUserForm.controls.birthDate"
         [errors]="formErrors().birthDate.errors"
         [messages]="formErrors().birthDate.messages"
       />
@@ -112,6 +112,8 @@
       </p-iftalabel>
     </div>
 
-    <button class="w-full" type="submit" pButton [disabled]="form.invalid">Cadastrar</button>
+    <button class="w-full" type="submit" pButton [disabled]="createUserForm.invalid">
+      Cadastrar
+    </button>
   </form>
 </app-page-container>
