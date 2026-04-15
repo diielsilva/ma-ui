@@ -5,44 +5,51 @@ import { catchError, throwError } from 'rxjs';
 import { ErrorResponseData } from '../types/error-response-data';
 
 export const httpErrorMessageInterceptor: HttpInterceptorFn = (req, next) => {
-  const defaultMessage = 'Não foi possível se conectar com o servidor';
   const messageService = inject(MessageService);
+  const defaultErrorMessage = 'Não foi possível se conectar com o servidor';
 
   return next(req).pipe(
-    catchError((httpError) => {
-      const shouldDisplayMessage =
-        httpError instanceof HttpErrorResponse && httpError.status !== 403;
+    catchError((httpError: HttpErrorResponse) => {
+      const shouldDisplayErrorMessage = httpError.status !== 403;
 
-      if (shouldDisplayMessage) {
-        const shouldDisplayDefaultMessage = httpError.status === 0;
+      if (shouldDisplayErrorMessage) {
+        const wasNotAbleToConnectToTheServer = httpError.status === 0;
 
-        if (shouldDisplayDefaultMessage) {
-          const toast: ToastMessageOptions = {
+        if (wasNotAbleToConnectToTheServer) {
+          const errorMessage: ToastMessageOptions = {
             severity: 'error',
-            detail: defaultMessage,
+            summary: defaultErrorMessage,
             sticky: true,
           };
 
-          messageService.add(toast);
+          messageService.add(errorMessage);
         } else {
-          const data: ErrorResponseData = {
+          const response: ErrorResponseData = {
             message: httpError.error.message,
             details: httpError.error.details,
           };
 
-          const toast: ToastMessageOptions = {
+          const errorMessage: ToastMessageOptions = {
             severity: 'error',
-            detail: data.message,
+            summary: response.message,
             sticky: true,
           };
 
-          messageService.add(toast);
+          messageService.add(errorMessage);
 
-          data.details.forEach((detail) => {
-            const toast: ToastMessageOptions = { severity: 'error', detail, sticky: true };
+          const doesResponseHaveDetails = response.details.length > 0;
 
-            messageService.add(toast);
-          });
+          if (doesResponseHaveDetails) {
+            response.details.forEach((detail) => {
+              const errorMessage: ToastMessageOptions = {
+                severity: 'error',
+                summary: detail,
+                sticky: true,
+              };
+
+              messageService.add(errorMessage);
+            });
+          }
         }
       }
 
