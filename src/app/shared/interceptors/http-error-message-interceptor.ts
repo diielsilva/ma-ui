@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { MessageService, ToastMessageOptions } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
-import { ErrorResponseData } from '../dtos/error-response-data';
+import { ErrorResponseData } from '../types/error-response-data';
 
 export const httpErrorMessageInterceptor: HttpInterceptorFn = (req, next) => {
   const defaultMessage = 'Não foi possível se conectar com o servidor';
