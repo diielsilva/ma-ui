@@ -8,8 +8,8 @@
 
       <app-form-field-error-message
         [field]="createUserForm.controls.name"
-        [errors]="formErrors().name.errors"
-        [messages]="formErrors().name.messages"
+        [errors]="createUserFormErrors().name.errors"
+        [messages]="createUserFormErrors().name.messages"
       />
     </div>
 
@@ -21,8 +21,8 @@
 
       <app-form-field-error-message
         [field]="createUserForm.controls.email"
-        [errors]="formErrors().email.errors"
-        [messages]="formErrors().email.messages"
+        [errors]="createUserFormErrors().email.errors"
+        [messages]="createUserFormErrors().email.messages"
       />
     </div>
 
@@ -34,8 +34,8 @@
 
       <app-form-field-error-message
         [field]="createUserForm.controls.password"
-        [errors]="formErrors().password.errors"
-        [messages]="formErrors().password.messages"
+        [errors]="createUserFormErrors().password.errors"
+        [messages]="createUserFormErrors().password.messages"
       />
     </div>
 
@@ -43,13 +43,13 @@
       <p-iftalabel>
         <input class="w-full" type="text" formControlName="cpf" pInputText id="cpf" />
         <label for="cpf">CPF</label>
-        <small class="italic">*O CPF deve conter apenas números.</small>
+        <small class="italic">O CPF deve conter apenas números.</small>
       </p-iftalabel>
 
       <app-form-field-error-message
         [field]="createUserForm.controls.cpf"
-        [errors]="formErrors().cpf.errors"
-        [messages]="formErrors().cpf.messages"
+        [errors]="createUserFormErrors().cpf.errors"
+        [messages]="createUserFormErrors().cpf.messages"
       />
     </div>
 
@@ -57,12 +57,12 @@
       <p-iftalabel>
         <input class="w-full" type="tel" formControlName="phone" pInputText id="phone" />
         <label for="phone">Telefone</label>
-        <small class="italic">*O telefone deve conter apenas números.</small>
+        <small class="italic">O telefone deve conter apenas números.</small>
 
         <app-form-field-error-message
           [field]="createUserForm.controls.phone"
-          [errors]="formErrors().phone.errors"
-          [messages]="formErrors().phone.messages"
+          [errors]="createUserFormErrors().phone.errors"
+          [messages]="createUserFormErrors().phone.messages"
         />
       </p-iftalabel>
     </div>
@@ -76,8 +76,8 @@
 
       <app-form-field-error-message
         [field]="createUserForm.controls.gender"
-        [errors]="formErrors().gender.errors"
-        [messages]="formErrors().gender.messages"
+        [errors]="createUserFormErrors().gender.errors"
+        [messages]="createUserFormErrors().gender.messages"
       />
     </div>
 
@@ -94,8 +94,8 @@
 
       <app-form-field-error-message
         [field]="createUserForm.controls.birthDate"
-        [errors]="formErrors().birthDate.errors"
-        [messages]="formErrors().birthDate.messages"
+        [errors]="createUserFormErrors().birthDate.errors"
+        [messages]="createUserFormErrors().birthDate.messages"
       />
     </div>
 

@@ -12,11 +12,12 @@ import { take } from 'rxjs';
 import { FormFieldErrorMessage } from '../../../shared/components/form-field-error-message/form-field-error-message';
 import { PageContainer } from '../../../shared/components/page-container/page-container';
 import { appRoutes } from '../../../shared/routes/application-routes';
-import { userCreationFormErrors } from '../../constants/user-creation-form-errors';
+import { CREATE_USER_FORM_ERRORS } from '../../constants/create-user-form-errors';
 import { UserService } from '../../services/user-service';
 import { CreateUserForm } from '../../types/create-user-form';
 import { CreateUserRequestData } from '../../types/create-user-request-data';
 import { Gender } from '../../types/gender';
+import { hasAgeToEnroll } from '../../validators/has-age-to-enroll';
 import { unsignedIntegerSequence } from '../../validators/unsigned-integer-sequence';
 
 @Component({
@@ -43,8 +44,8 @@ export class CreateUserPage implements OnInit {
   private userService = inject(UserService);
 
   protected genders = ['Masculino', 'Feminino'];
-  protected formErrors = signal(userCreationFormErrors);
   protected createUserForm!: FormGroup<CreateUserForm>;
+  protected createUserFormErrors = signal(CREATE_USER_FORM_ERRORS);
 
   ngOnInit() {
     this.buildCreateUserForm();
@@ -68,7 +69,10 @@ export class CreateUserPage implements OnInit {
         unsignedIntegerSequence(),
       ]),
       gender: this.formBuilder.control('', [Validators.required]),
-      birthDate: this.formBuilder.control(new Date(1970, 1, 1), [Validators.required]),
+      birthDate: this.formBuilder.control(new Date(1970, 1, 1), [
+        Validators.required,
+        hasAgeToEnroll(),
+      ]),
       disabilities: this.formBuilder.control(''),
     });
   }
