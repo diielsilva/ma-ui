@@ -22,7 +22,7 @@ export class Header {
     {
       label: 'Sair',
       icon: 'pi pi-sign-out',
-      routerLink: ROUTES.login,
+      routerLink: ROUTES.security.login,
     },
   ];
 
@@ -39,12 +39,12 @@ export class Header {
     {
       label: 'Sair',
       icon: 'pi pi-sign-out',
-      routerLink: ROUTES.login,
+      routerLink: ROUTES.security.login,
     },
   ];
 
   protected sessionlessNavbarItems: MenuItem[] = [
-    { label: 'Entrar', icon: 'pi pi-sign-in', routerLink: ROUTES.login },
+    { label: 'Entrar', icon: 'pi pi-sign-in', routerLink: ROUTES.security.login },
     { label: 'Cadastre-se', icon: 'pi pi-user-plus', routerLink: ROUTES.users.create },
   ];
 

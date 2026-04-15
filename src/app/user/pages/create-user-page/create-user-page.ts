@@ -106,7 +106,7 @@ export class CreateUserPage implements OnInit {
 
             this.messageService.add(successMessage);
 
-            this.router.navigateByUrl(ROUTES.login);
+            this.router.navigateByUrl(ROUTES.security.login);
           },
         });
     }
