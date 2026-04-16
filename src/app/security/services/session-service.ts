@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { LoginResponseData } from '../dtos/login-response-data';
+import { LoginResponseData } from '../types/login-response-data';
 
 @Injectable({
   providedIn: 'root',

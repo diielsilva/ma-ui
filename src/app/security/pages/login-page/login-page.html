@@ -1,26 +1,16 @@
 <app-page-card cardTitle="Realizar Login">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="mb-2">
       <p-iftalabel>
         <input formControlName="email" id="email" pInputText class="w-full" />
         <label for="email">Email</label>
       </p-iftalabel>
 
-      @let email = form.get('email');
-      @let isEmailFieldInvalid = email?.touched && email?.invalid;
-
-      @if (isEmailFieldInvalid) {
-        @let isMissingEmail = email?.errors?.['required'];
-        @let isAnInvalidEmail = email?.errors?.['email'];
-
-        @if (isMissingEmail) {
-          <app-form-error-message [message]="'O email não pode ser nulo'" />
-        }
-
-        @if (isAnInvalidEmail) {
-          <app-form-error-message [message]="'O email fornecido é inválido'" />
-        }
-      }
+      <app-form-field-error-message
+        [field]="loginForm.controls.email"
+        [errors]="loginFormErrors().email.errors"
+        [messages]="loginFormErrors().email.messages"
+      />
     </div>
 
     <div class="mb-2">
@@ -29,23 +19,13 @@
         <label for="password">Senha</label>
       </p-iftalabel>
 
-      @let password = form.get('password');
-      @let isPasswordFieldInvalid = password?.touched && password?.invalid;
-
-      @if (isPasswordFieldInvalid) {
-        @let isMissingPassword = password?.errors?.['required'];
-        @let doesPasswordHaveAnInvalidLength = password?.errors?.['minlength'];
-
-        @if (isMissingPassword) {
-          <app-form-error-message [message]="'A senha não pode ser nula'" />
-        }
-
-        @if (doesPasswordHaveAnInvalidLength) {
-          <app-form-error-message [message]="'A senha deve conter ao menos 5 caracteres'" />
-        }
-      }
+      <app-form-field-error-message
+        [field]="loginForm.controls.password"
+        [errors]="loginFormErrors().password.errors"
+        [messages]="loginFormErrors().password.messages"
+      />
     </div>
 
-    <button type="submit" pButton class="w-full" [disabled]="form.invalid">Entrar</button>
+    <button type="submit" pButton class="w-full" [disabled]="loginForm.invalid">Entrar</button>
   </form>
 </app-page-card>
