@@ -10,7 +10,7 @@ import { SelectModule } from 'primeng/select';
 import { TextareaModule } from 'primeng/textarea';
 import { take } from 'rxjs';
 import { FormFieldErrorMessage } from '../../../shared/components/form-field-error-message/form-field-error-message';
-import { PageContainer } from '../../../shared/components/page-container/page-container';
+import { PageCard } from '../../../shared/components/page-card/page-card';
 import { ROUTES } from '../../../shared/routes/routes';
 import { CREATE_USER_FORM_ERRORS } from '../../constants/create-user-form-errors';
 import { UserService } from '../../services/user-service';
@@ -28,7 +28,7 @@ import { unsignedIntegerSequence } from '../../validators/unsigned-integer-seque
     FormFieldErrorMessage,
     IftaLabelModule,
     InputTextModule,
-    PageContainer,
+    PageCard,
     ReactiveFormsModule,
     SelectModule,
     TextareaModule,

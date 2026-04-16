@@ -1,4 +1,4 @@
-<app-page-container [page]="'Meus Pedidos de Inscrição'">
+<app-page-card cardTitle="Meus Pedidos de Inscrição">
   @if (state() === 1 && orders().length === 0) {
     <span>Você não possui pedidos</span>
   } @else if (state() === 1 && orders().length > 0) {
@@ -6,7 +6,7 @@
       <app-order-card [data]="order" (onBtnClick)="handleOrderCardClick($event)" />
     }
   }
-</app-page-container>
+</app-page-card>
 <p-dialog [visible]="shouldDisplayPixDetailModal()" [modal]="true" (onHide)="hidePixDetail()">
   <img class="max-w-75 rounded-sm" src="{{ pixDetail()?.qrCodeUrl }}" title="QR Code Image" />
   <button

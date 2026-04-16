@@ -3,11 +3,11 @@ import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 
 @Component({
-  selector: 'app-page-container',
+  selector: 'app-page-card',
   imports: [CardModule, DividerModule],
-  templateUrl: './page-container.html',
-  styleUrl: './page-container.css',
+  templateUrl: './page-card.html',
+  styleUrl: './page-card.css',
 })
-export class PageContainer {
-  page = input.required<string>();
+export class PageCard {
+  cardTitle = input.required<string>();
 }
