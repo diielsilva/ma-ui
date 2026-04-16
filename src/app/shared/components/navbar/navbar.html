@@ -1,0 +1,7 @@
+@if (hasSession() && isAnAdminSession()) {
+  <p-menubar class="w-md sm:w-xl mt-2 mb-2 p-2" [model]="adminNavbar" />
+} @else if (hasSession()) {
+  <p-menubar class="w-md sm:w-xl mt-2 mb-2 p-2" [model]="commonUserNavbar" />
+} @else {
+  <p-menubar class="w-md sm:w-xl mt-2 mb-2 p-2" [model]="guestNavbar" />
+}

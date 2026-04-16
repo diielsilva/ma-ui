@@ -9,7 +9,7 @@ import { MessageModule } from 'primeng/message';
 import { take } from 'rxjs';
 import { EnrollmentService } from '../../../enrollment/services/enrollment-service';
 import { FormFieldErrorMessage } from '../../../shared/components/form-field-error-message/form-field-error-message';
-import { PageContainer } from '../../../shared/components/page-container/page-container';
+import { PageCard } from '../../../shared/components/page-card/page-card';
 import { unsignedIntegerSequence } from '../../../user/validators/unsigned-integer-sequence';
 import { OrderCard } from '../../components/order-card/order-card';
 import { searchOrderFormErrors } from '../../constants/search-order-form-errors';
@@ -24,7 +24,7 @@ import { SearchOrderPageState } from './search-order-page-state';
 @Component({
   selector: 'app-search-order-page',
   imports: [
-    PageContainer,
+    PageCard,
     ButtonModule,
     InputTextModule,
     FormFieldErrorMessage,

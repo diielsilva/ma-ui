@@ -6,14 +6,14 @@ import { IftaLabel } from 'primeng/iftalabel';
 import { SelectModule } from 'primeng/select';
 import { take } from 'rxjs';
 import { FormErrorMessage } from '../../../shared/components/form-error-message/form-error-message';
-import { PageContainer } from '../../../shared/components/page-container/page-container';
+import { PageCard } from '../../../shared/components/page-card/page-card';
 import { CreateOrderRequestData } from '../../dtos/create-order-request-data';
 import { OrderService } from '../../services/order-service';
 
 @Component({
   selector: 'app-register-order-page',
   imports: [
-    PageContainer,
+    PageCard,
     SelectModule,
     ReactiveFormsModule,
     IftaLabel,

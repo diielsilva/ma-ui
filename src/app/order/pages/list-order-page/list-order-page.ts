@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { take } from 'rxjs';
 import { SessionService } from '../../../security/services/session-service';
-import { PageContainer } from '../../../shared/components/page-container/page-container';
+import { PageCard } from '../../../shared/components/page-card/page-card';
 import { OrderCard } from '../../components/order-card/order-card';
 import { OrderService } from '../../services/order-service';
 import { Order } from '../../types/order';
@@ -15,7 +15,7 @@ import { ListOrderPageState } from './list-order-page-state';
 
 @Component({
   selector: 'app-list-session-owner-order-page',
-  imports: [PageContainer, OrderCard, DialogModule, ClipboardModule, ButtonModule],
+  imports: [PageCard, OrderCard, DialogModule, ClipboardModule, ButtonModule],
   templateUrl: './list-order-page.html',
   styleUrl: './list-order-page.css',
 })

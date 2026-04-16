@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
-import { appRoutes } from '../../shared/routes/application-routes';
+import { ROUTES } from '../../shared/routes/routes';
 import { SessionService } from '../services/session-service';
 
 export const JwtInterceptor: HttpInterceptorFn = (req, next) => {
@@ -21,7 +21,7 @@ export const JwtInterceptor: HttpInterceptorFn = (req, next) => {
         const shouldDestroySession = error.status === 401 || error.status === 403;
 
         if (shouldDestroySession) {
-          router.navigateByUrl(appRoutes.login);
+          router.navigateByUrl(ROUTES.security.login);
         }
 
         return throwError(() => error);

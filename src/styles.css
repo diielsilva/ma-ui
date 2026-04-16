@@ -3,3 +3,7 @@
 @import 'tailwindcss';
 @import 'tailwindcss-primeui';
 @import 'primeicons/primeicons.css';
+
+html {
+  font-family: 'Roboto', 'Inter';
+}

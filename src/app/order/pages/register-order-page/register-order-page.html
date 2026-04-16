@@ -1,4 +1,4 @@
-<app-page-container [page]="'Realizar Pedido de Inscrição'">
+<app-page-card cardTitle="Realizar Pedido de Inscrição">
   <form [formGroup]="form" (ngSubmit)="create()">
     <div class="mb-2">
       <p-iftalabel>
@@ -43,4 +43,4 @@
 
     <button [disabled]="form.invalid" type="submit" class="w-full" pButton>Realizar</button>
   </form>
-</app-page-container>
+</app-page-card>
