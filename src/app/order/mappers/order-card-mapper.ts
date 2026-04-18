@@ -15,7 +15,7 @@ export class OrderCardMapper {
     if (order.paymentMethod === PaymentMethod.CASH) {
       const isBtnVisible =
         order.status === OrderStatus.PENDING &&
-        order.dueDate.valueOf() > Date.now() &&
+        new Date(order.dueDate).valueOf() > Date.now() &&
         this.sessionService.isAnAdminSession();
 
       const cardData: OrderCardData = {
@@ -28,7 +28,7 @@ export class OrderCardMapper {
     }
 
     const isBtnVisible =
-      order.status === OrderStatus.PENDING && order.dueDate.valueOf() > Date.now();
+      order.status === OrderStatus.PENDING && new Date(order.dueDate).valueOf() > Date.now();
 
     const cardData: OrderCardData = {
       order: order,
