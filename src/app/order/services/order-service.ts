@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { CreateOrderRequestData } from '../dtos/create-order-request-data';
+import { CreateOrderRequestData } from '../types/create-order-request-data';
 import { Order } from '../types/order';
 import { PixDetail } from '../types/pix-detail';
 
@@ -9,14 +9,14 @@ import { PixDetail } from '../types/pix-detail';
   providedIn: 'root',
 })
 export class OrderService {
-  private url = `${environment.apiUrl}/orders`;
   private httpClient = inject(HttpClient);
+  private url = `${environment.apiUrl}/orders`;
 
-  public create(data: CreateOrderRequestData) {
+  create(data: CreateOrderRequestData) {
     return this.httpClient.post<void>(this.url, data);
   }
 
-  public findAll() {
+  findAll() {
     return this.httpClient.get<Order[]>(this.url);
   }
 

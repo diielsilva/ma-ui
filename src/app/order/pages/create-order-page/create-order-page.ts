@@ -8,7 +8,7 @@ import { take } from 'rxjs';
 import { FormFieldErrorMessage } from '../../../shared/components/form-field-error-message/form-field-error-message';
 import { PageCard } from '../../../shared/components/page-card/page-card';
 import { CREATE_ORDER_FORM_ERRORS } from '../../constants/create-order-form-errors';
-import { CreateOrderRequestData } from '../../dtos/create-order-request-data';
+import { CreateOrderRequestData } from '../../types/create-order-request-data';
 import { OrderService } from '../../services/order-service';
 import { CreateOrderForm } from '../../types/create-order-form';
 import { PaymentMethod } from '../../types/payment-method';
@@ -43,7 +43,11 @@ export class CreateOrderPage implements OnInit {
   private buildCreateOrderForm() {
     this.createOrderForm = this.formBuilder.group({
       paymentMethod: this.formBuilder.control('', [Validators.required]),
-      value: this.formBuilder.control(30, [Validators.required]),
+      value: this.formBuilder.control(30, [
+        Validators.required,
+        Validators.min(10),
+        Validators.max(40),
+      ]),
     });
   }
 
