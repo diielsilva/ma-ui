@@ -16,15 +16,15 @@ export class OrderService {
     return this.httpClient.post<void>(this.url, data);
   }
 
-  findAll() {
+  findAllBelongningToTheSessionOwner() {
     return this.httpClient.get<Order[]>(this.url);
   }
 
-  search(cpf: string) {
-    return this.httpClient.get<Order[]>(`${this.url}/search?cpf=${cpf}`);
+  searchBy(userCpf: string) {
+    return this.httpClient.get<Order[]>(`${this.url}/search?cpf=${userCpf}`);
   }
 
-  getPixDetailByOrderId(orderId: number) {
+  findPixDetailBy(orderId: number) {
     return this.httpClient.get<PixDetail>(`${this.url}/${orderId}/details`);
   }
 }

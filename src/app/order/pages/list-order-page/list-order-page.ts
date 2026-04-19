@@ -28,13 +28,13 @@ export class ListOrderPage implements OnInit {
   protected pixDetail = signal<PixDetail | undefined>(undefined);
   protected shouldDisplayPixDetailModal = computed(() => this.pixDetail() !== undefined);
 
-  public ngOnInit() {
-    this.findAll();
+  ngOnInit() {
+    this.findAllOrdersOfTheSessionOwner();
   }
 
-  protected findAll() {
+  protected findAllOrdersOfTheSessionOwner() {
     this.orderService
-      .findAll()
+      .findAllBelongningToTheSessionOwner()
       .pipe(take(1))
       .subscribe({
         next: (orders: Order[]) => {
@@ -63,7 +63,7 @@ export class ListOrderPage implements OnInit {
 
   protected getPixDetailBy(orderId: number) {
     this.orderService
-      .getPixDetailByOrderId(orderId)
+      .findPixDetailBy(orderId)
       .pipe(take(1))
       .subscribe({ next: (response: PixDetail) => this.pixDetail.set(response) });
   }

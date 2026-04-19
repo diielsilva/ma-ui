@@ -62,7 +62,7 @@ export class SearchByUserCpfPage {
       const cpf = this.form.controls.cpf.value;
 
       this.orderService
-        .search(cpf)
+        .searchBy(cpf)
         .pipe(take(1))
         .subscribe({
           next: (response: Order[]) => this.displayCards(response),
