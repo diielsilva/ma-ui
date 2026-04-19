@@ -1,38 +1,35 @@
-<p-panel class="mb-2">
+@let order = cardData().order;
+
+<p-panel class="mb-2 p-1">
   <ul>
     <li>
-      <span class="font-semibold mr-2">Pagar Com:</span
-      >{{ data().order.paymentMethod | paymentMethod }}
+      <span class="font-semibold mr-2">Pagar Com:</span>{{ order.paymentMethod | paymentMethod }}
     </li>
     <li>
       <span class="font-semibold mr-2">Status:</span
       ><span
-        [ngClass]="{
-          'text-red-500': data().order.status === 'CANCELLED',
-          'text-yellow-500': data().order.status === 'PENDING',
-          'text-green-500': data().order.status === 'CONFIRMED',
+        [class]="{
+          'text-red-500': order.status === 'CANCELLED',
+          'text-yellow-500': order.status === 'PENDING',
+          'text-green-500': order.status === 'CONFIRMED',
         }"
-        >{{ data().order.status | orderStatus }}</span
+        >{{ order.status | orderStatus }}</span
       >
     </li>
     <li>
       <span class="font-semibold mr-2">Expira Em:</span
-      >{{ data().order.dueDate | date: 'dd/MM/yyyy hh:mm' }}
+      >{{ order.dueDate | date: 'dd/MM/yyyy hh:mm' }}
     </li>
     <li>
       <span class="font-semibold mr-2">Valor:</span>
-      R${{ data().order.value }}
+      R$ {{ order.value }}
     </li>
   </ul>
-  <ng-template #footer>
-    <button
-      class="text-right"
-      (click)="onBtnClick.emit(data().order.id)"
-      type="button"
-      pButton
-      [disabled]="data().isBtnDisabled"
-    >
-      {{ data().btnText }}
-    </button>
-  </ng-template>
+  @if (cardData().isBtnVisible) {
+    <div class="w-full flex justify-end">
+      <button (click)="onBtnClick.emit(order.id)" type="button" pButton>
+        {{ cardData().btnText }}
+      </button>
+    </div>
+  }
 </p-panel>

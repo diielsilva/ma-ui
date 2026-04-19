@@ -80,7 +80,7 @@ export class SearchByUserCpfPage {
         const data: OrderCardData = {
           order: order,
           btnText: 'Detalhes',
-          isBtnDisabled: true,
+          isBtnVisible: true,
         };
 
         this.cards().push(data);
@@ -88,7 +88,7 @@ export class SearchByUserCpfPage {
         const data: OrderCardData = {
           order: order,
           btnText: 'Confirmar',
-          isBtnDisabled:
+          isBtnVisible:
             order.dueDate.valueOf() < Date.now() || order.status !== OrderStatus.PENDING,
         };
 

@@ -3,7 +3,7 @@
     <span>Você não possui pedidos</span>
   } @else if (state() === 1 && orders().length > 0) {
     @for (order of orders(); track $index) {
-      <app-order-card [data]="order" (onBtnClick)="handleOrderCardClick($event)" />
+      <app-order-card [cardData]="order" (onBtnClick)="handleOrderCardClick($event)" />
     }
   }
 </app-page-card>

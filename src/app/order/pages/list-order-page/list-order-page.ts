@@ -3,9 +3,9 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { take } from 'rxjs';
-import { SessionService } from '../../../security/services/session-service';
 import { PageCard } from '../../../shared/components/page-card/page-card';
 import { OrderCard } from '../../components/order-card/order-card';
+import { OrderCardMapper } from '../../mappers/order-card-mapper';
 import { OrderService } from '../../services/order-service';
 import { Order } from '../../types/order';
 import { OrderCardData } from '../../types/order-card-data';
@@ -21,7 +21,7 @@ import { ListOrderPageState } from './list-order-page-state';
 })
 export class ListOrderPage implements OnInit {
   private orderService = inject(OrderService);
-  private sessionService = inject(SessionService);
+  private orderCardMapper = inject(OrderCardMapper);
 
   protected orders = signal<OrderCardData[]>([]);
   protected state = signal<ListOrderPageState>(ListOrderPageState.INITIAL);
@@ -40,29 +40,9 @@ export class ListOrderPage implements OnInit {
         next: (orders: Order[]) => {
           this.state.set(ListOrderPageState.LOADED);
 
-          for (const order of orders) {
-            if (order.paymentMethod === 'CASH') {
-              const btnText = 'Confirmar';
+          const orderCards = this.orderCardMapper.mapAll(orders);
 
-              const isBtnDisabled =
-                order.status !== 'PENDING' ||
-                order.dueDate.valueOf() < Date.now().valueOf() ||
-                !this.sessionService.isAnAdminSession();
-
-              const cardData: OrderCardData = { order, btnText, isBtnDisabled };
-
-              this.orders().push(cardData);
-            } else {
-              const btnText = 'Detalhes';
-
-              const isBtnDisabled =
-                order.status !== 'PENDING' || order.dueDate.valueOf() < Date.now().valueOf();
-
-              const cardData: OrderCardData = { order, btnText, isBtnDisabled };
-
-              this.orders().push(cardData);
-            }
-          }
+          this.orders.set(orderCards);
         },
       });
   }
