@@ -1,5 +1,5 @@
 <app-navbar
-  [hasSession]="sessionService.hasSession()"
+  [hasSession]="sessionService.hasAnOnlineUser()"
   [isAnAdminSession]="sessionService.isAnAdminSession()"
 />
 

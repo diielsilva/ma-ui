@@ -57,7 +57,7 @@ export class SearchOrderPage implements OnInit {
   }
 
   private buildSearchOrderForm() {
-    const sessionOwnerCpf = this.sessionService.sessionOwnerIdentifier;
+    const sessionOwnerCpf = this.sessionService.getSessionOwnerCpf();
 
     this.searchOrderForm = this.formBuilder.group({
       cpf: this.formBuilder.control('', [
