@@ -2,11 +2,11 @@ import { Component, input } from '@angular/core';
 import { MessageModule } from 'primeng/message';
 
 @Component({
-  selector: 'app-form-error-message',
+  selector: 'app-warning-message',
   imports: [MessageModule],
-  templateUrl: './form-error-message.html',
-  styleUrl: './form-error-message.css',
+  templateUrl: './warning-message.html',
+  styleUrl: './warning-message.css',
 })
-export class FormErrorMessage {
+export class WarningMessage {
   message = input.required<string>();
 }

@@ -1,14 +1,17 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { ROUTES } from '../../shared/routes/routes';
 import { SessionService } from '../services/session-service';
 
 export const authorizationGuard: CanActivateFn = () => {
-  const sessionService = inject(SessionService);
   const router = inject(Router);
+  const sessionService = inject(SessionService);
 
-  if (!sessionService.hasSession()) {
-    router.navigateByUrl('');
+  if (!sessionService.hasAnOnlineUser()) {
+    router.navigateByUrl(ROUTES.security.login);
+
+    return false;
   }
 
-  return sessionService.hasSession();
+  return true;
 };

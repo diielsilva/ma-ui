@@ -1,20 +1,27 @@
 <app-page-card cardTitle="Meus Pedidos de Inscrição">
-  @if (state() === 1 && orders().length === 0) {
-    <span>Você não possui pedidos</span>
-  } @else if (state() === 1 && orders().length > 0) {
-    @for (order of orders(); track $index) {
-      <app-order-card [data]="order" (onBtnClick)="handleOrderCardClick($event)" />
+  @if (pageState() === 1 && orderCards().length === 0) {
+    <app-warning-message message="Você não possui pedidos de inscrição cadastrados" />
+  } @else if (pageState() === 1 && orderCards().length > 0) {
+    @for (card of orderCards(); track $index) {
+      <app-order-card [cardData]="card" (onBtnClick)="handleOrderCardClick($event)" />
     }
   }
+  <app-refresh-page-button
+    btnText="Recarregar Meus Pedidos"
+    [isBtnDisabled]="false"
+    (refreshPage)="findAllOrdersOfTheSessionOwner()"
+  />
 </app-page-card>
-<p-dialog [visible]="shouldDisplayPixDetailModal()" [modal]="true" (onHide)="hidePixDetail()">
+
+<p-dialog [visible]="isPixDetailVisible()" [modal]="true" (onHide)="hidePixDetail()">
   <img class="max-w-75 rounded-sm" src="{{ pixDetail()?.qrCodeUrl }}" title="QR Code Image" />
   <button
     type="button"
     pButton
     class="w-full mt-2"
     [cdkCopyToClipboard]="pixDetail()?.copyAndPasteCode!"
+    (cdkCopyToClipboardCopied)="warnUserThatPixCodeWasCopiedToClipboard()"
   >
-    Copiar Código
+    {{ copyPixCodeToClipboardBtnText() }}
   </button>
 </p-dialog>

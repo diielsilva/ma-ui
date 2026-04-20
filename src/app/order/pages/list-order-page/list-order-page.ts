@@ -1,11 +1,14 @@
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
+import { MessageService, ToastMessageOptions } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
 import { take } from 'rxjs';
-import { SessionService } from '../../../security/services/session-service';
+import { EnrollmentService } from '../../../enrollment/services/enrollment-service';
 import { PageCard } from '../../../shared/components/page-card/page-card';
+import { RefreshPageButton } from '../../../shared/components/refresh-page-button/refresh-page-button';
+import { WarningMessage } from '../../../shared/components/warning-message/warning-message';
 import { OrderCard } from '../../components/order-card/order-card';
+import { OrderCardMapper } from '../../mappers/order-card-mapper';
 import { OrderService } from '../../services/order-service';
 import { Order } from '../../types/order';
 import { OrderCardData } from '../../types/order-card-data';
@@ -15,80 +18,88 @@ import { ListOrderPageState } from './list-order-page-state';
 
 @Component({
   selector: 'app-list-session-owner-order-page',
-  imports: [PageCard, OrderCard, DialogModule, ClipboardModule, ButtonModule],
+  imports: [ClipboardModule, DialogModule, OrderCard, PageCard, RefreshPageButton, WarningMessage],
   templateUrl: './list-order-page.html',
   styleUrl: './list-order-page.css',
 })
 export class ListOrderPage implements OnInit {
   private orderService = inject(OrderService);
-  private sessionService = inject(SessionService);
+  private enrollmentService = inject(EnrollmentService);
+  private messageService = inject(MessageService);
+  private orderCardMapper = inject(OrderCardMapper);
 
-  protected orders = signal<OrderCardData[]>([]);
-  protected state = signal<ListOrderPageState>(ListOrderPageState.INITIAL);
+  protected orderCards = signal<OrderCardData[]>([]);
+  protected pageState = signal(ListOrderPageState.INITIAL);
   protected pixDetail = signal<PixDetail | undefined>(undefined);
-  protected shouldDisplayPixDetailModal = computed(() => this.pixDetail() !== undefined);
+  protected isPixDetailVisible = computed(() => this.pixDetail() !== undefined);
+  protected copyPixCodeToClipboardBtnText = signal('Copiar Código');
 
-  public ngOnInit() {
-    this.findAll();
+  ngOnInit() {
+    this.findAllOrdersOfTheSessionOwner();
   }
 
-  protected findAll() {
+  protected findAllOrdersOfTheSessionOwner() {
     this.orderService
-      .findAll()
+      .findAllBelongningToTheSessionOwner()
       .pipe(take(1))
       .subscribe({
         next: (orders: Order[]) => {
-          this.state.set(ListOrderPageState.LOADED);
+          this.pageState.set(ListOrderPageState.LOADED);
 
-          for (const order of orders) {
-            if (order.paymentMethod === 'CASH') {
-              const btnText = 'Confirmar';
+          const orderCards = this.orderCardMapper.mapAll(orders);
 
-              const isBtnDisabled =
-                order.status !== 'PENDING' ||
-                order.dueDate.valueOf() < Date.now().valueOf() ||
-                !this.sessionService.isAnAdminSession();
-
-              const cardData: OrderCardData = { order, btnText, isBtnDisabled };
-
-              this.orders().push(cardData);
-            } else {
-              const btnText = 'Detalhes';
-
-              const isBtnDisabled =
-                order.status !== 'PENDING' || order.dueDate.valueOf() < Date.now().valueOf();
-
-              const cardData: OrderCardData = { order, btnText, isBtnDisabled };
-
-              this.orders().push(cardData);
-            }
-          }
+          this.orderCards.set(orderCards);
         },
       });
   }
 
   protected handleOrderCardClick(orderId: number) {
-    for (const card of this.orders()) {
-      if (card.order.id === orderId) {
-        if (card.order.paymentMethod === PaymentMethod.PIX) {
-          this.getPixDetailBy(orderId);
-        } else {
-          //TODO code to confirm order, when an admin is online
-        }
+    const selectedCards = this.orderCards().filter((orderCard) => orderCard.order.id === orderId);
+    const wasOrderFound = selectedCards.length === 1;
 
-        break;
+    if (wasOrderFound) {
+      const order = selectedCards[0].order;
+
+      if (order.paymentMethod === PaymentMethod.PIX) {
+        this.displayPixDetail(orderId);
+      } else {
+        this.confirmManualEnrollment(orderId);
       }
     }
   }
 
-  protected getPixDetailBy(orderId: number) {
+  private confirmManualEnrollment(orderId: number) {
+    this.enrollmentService
+      .create(orderId)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          const successMessage: ToastMessageOptions = {
+            severity: 'success',
+            summary: 'Inscrição realizada com sucesso',
+            sticky: true,
+          };
+
+          this.messageService.add(successMessage);
+
+          this.findAllOrdersOfTheSessionOwner();
+        },
+      });
+  }
+
+  protected displayPixDetail(orderId: number) {
     this.orderService
-      .getPixDetailByOrderId(orderId)
+      .findPixDetailBy(orderId)
       .pipe(take(1))
       .subscribe({ next: (response: PixDetail) => this.pixDetail.set(response) });
   }
 
+  protected warnUserThatPixCodeWasCopiedToClipboard() {
+    this.copyPixCodeToClipboardBtnText.set('Copiado');
+  }
+
   protected hidePixDetail() {
     this.pixDetail.set(undefined);
+    this.copyPixCodeToClipboardBtnText.set('Copiar Código');
   }
 }

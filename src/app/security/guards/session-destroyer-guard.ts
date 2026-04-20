@@ -5,7 +5,7 @@ import { SessionService } from '../services/session-service';
 export const sessionDestroyerGuard: CanActivateFn = () => {
   const sessionService = inject(SessionService);
 
-  if (sessionService.hasSession()) {
+  if (sessionService.hasAnOnlineUser()) {
     sessionService.destroy();
   }
 

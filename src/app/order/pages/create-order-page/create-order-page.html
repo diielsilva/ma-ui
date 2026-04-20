@@ -1,0 +1,38 @@
+<app-page-card cardTitle="Realizar Pedido de Inscrição">
+  <form [formGroup]="createOrderForm" (ngSubmit)="createOrder()">
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select
+          class="w-full"
+          formControlName="paymentMethod"
+          [options]="paymentMethods"
+          id="payment-method"
+        />
+        <label for="payment-method">Forma de Pagamento</label>
+
+        <app-form-field-error-message
+          [field]="createOrderForm.controls.paymentMethod"
+          [errors]="createOrderFormErrors().paymentMethod.errors"
+          [messages]="createOrderFormErrors().paymentMethod.messages"
+        />
+      </p-iftalabel>
+    </div>
+
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select class="w-full" formControlName="value" [options]="orderValues" id="value" />
+        <label for="value">R$ Valor</label>
+      </p-iftalabel>
+
+      <app-form-field-error-message
+        [field]="createOrderForm.controls.value"
+        [errors]="createOrderFormErrors().value.errors"
+        [messages]="createOrderFormErrors().value.messages"
+      />
+    </div>
+
+    <button [disabled]="createOrderForm.invalid" type="submit" class="w-full" pButton>
+      Realizar
+    </button>
+  </form>
+</app-page-card>

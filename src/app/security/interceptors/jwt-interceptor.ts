@@ -6,11 +6,11 @@ import { ROUTES } from '../../shared/routes/routes';
 import { SessionService } from '../services/session-service';
 
 export const JwtInterceptor: HttpInterceptorFn = (req, next) => {
-  const sessionService = inject(SessionService);
   const router = inject(Router);
+  const sessionService = inject(SessionService);
 
-  if (sessionService.hasSession()) {
-    const jwt = sessionService.sessionToken;
+  if (sessionService.hasAnOnlineUser()) {
+    const jwt = sessionService.getSessionToken();
 
     const authenticatedRequest = req.clone({
       headers: req.headers.append('Authorization', `Bearer ${jwt}`),

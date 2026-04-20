@@ -4,8 +4,8 @@ import { ROUTES } from '../../shared/routes/routes';
 import { SessionService } from '../services/session-service';
 
 export const adminSessionGuard: CanActivateFn = () => {
-  const sessionService = inject(SessionService);
   const router = inject(Router);
+  const sessionService = inject(SessionService);
 
   if (!sessionService.isAnAdminSession()) {
     router.navigateByUrl(ROUTES.orders.create);

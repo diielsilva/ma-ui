@@ -1,5 +1,5 @@
 <app-page-card cardTitle="Pesquisar Pedidos de Incrição">
-  <form [formGroup]="form" (ngSubmit)="search()">
+  <form [formGroup]="searchOrderForm" (ngSubmit)="searchManualOrders()">
     <div class="mb-2">
       <p-iftalabel>
         <input class="w-full" type="text" name="" pInputText formControlName="cpf" id="cpf" />
@@ -7,22 +7,27 @@
       </p-iftalabel>
 
       <app-form-field-error-message
-        [field]="form.controls.cpf"
-        [errors]="formErrors().cpf.errors"
-        [messages]="formErrors().cpf.messages"
+        [field]="searchOrderForm.controls.cpf"
+        [errors]="searchOrderFormErrors().cpf.errors"
+        [messages]="searchOrderFormErrors().cpf.messages"
       />
     </div>
-    <button class="w-full" type="submit" [disabled]="form.invalid" pButton>Pesquisar</button>
+    <button class="w-full" type="submit" [disabled]="searchOrderForm.invalid" pButton>
+      Pesquisar
+    </button>
   </form>
 
-  @if (state() === 1) {
+  @if (pageState() === 1) {
     <div class="mt-4">
-      @if (cards().length > 0) {
-        @for (data of cards(); track $index) {
-          <app-order-card [data]="data" (onBtnClick)="confirmOrder($event)" />
+      @if (manualOrderCards().length > 0) {
+        @for (cardData of manualOrderCards(); track $index) {
+          <app-order-card [cardData]="cardData" (onBtnClick)="confirmManualEnrollment($event)" />
         }
       } @else {
-        <p-message severity="info">O usuário não possui pedidos de inscrição</p-message>
+        <app-warning-message
+          message="O usuário não possui pedidos de inscrição que possam ser confirmados
+          manualmente"
+        />
       }
     </div>
   }

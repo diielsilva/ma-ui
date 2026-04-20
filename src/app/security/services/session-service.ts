@@ -1,35 +1,40 @@
 import { computed, Injectable, signal } from '@angular/core';
+import { Role } from '../../user/types/role';
 import { LoginResponseData } from '../types/login-response-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SessionService {
-  private session = signal<LoginResponseData | undefined>(undefined);
-  private hasActive = computed(() => this.session() !== undefined);
-  private belongsToAnAdmin = computed(() => this.hasActive() && this.session()?.role === 'ADMIN');
+  private userSession = signal<LoginResponseData | undefined>(undefined);
 
-  public create(data: LoginResponseData) {
-    this.session.set(data);
+  hasAnOnlineUser = computed(() => this.userSession() !== undefined);
+
+  isAnAdminSession = computed(
+    () => this.hasAnOnlineUser() && this.userSession()?.role === Role.ADMIN,
+  );
+
+  create(data: LoginResponseData) {
+    this.userSession.set(data);
   }
 
-  public get hasSession() {
-    return this.hasActive;
+  destroy() {
+    this.userSession.set(undefined);
   }
 
-  public get isAnAdminSession() {
-    return this.belongsToAnAdmin;
-  }
-
-  public get sessionToken() {
-    if (this.hasSession()) {
-      return this.session()!.token;
+  getSessionToken() {
+    if (!this.hasAnOnlineUser()) {
+      throw new Error('Não há usuários online');
     }
 
-    return '';
+    return this.userSession()!.token;
   }
 
-  public destroy() {
-    this.session.set(undefined);
+  getSessionOwnerCpf() {
+    if (!this.hasAnOnlineUser()) {
+      throw new Error('Não há usuários online');
+    }
+
+    return this.userSession()!.cpf;
   }
 }
