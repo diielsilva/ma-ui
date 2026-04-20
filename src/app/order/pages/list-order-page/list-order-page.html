@@ -1,8 +1,6 @@
 <app-page-card cardTitle="Meus Pedidos de Inscrição">
   @if (pageState() === 1 && orderCards().length === 0) {
-    <p-message class="mb-2" severity="warn" icon="pi pi-info-circle"
-      >Você não possui pedidos de inscrição cadastrados</p-message
-    >
+    <app-warning-message message="Você não possui pedidos de inscrição cadastrados" />
   } @else if (pageState() === 1 && orderCards().length > 0) {
     @for (card of orderCards(); track $index) {
       <app-order-card [cardData]="card" (onBtnClick)="handleOrderCardClick($event)" />

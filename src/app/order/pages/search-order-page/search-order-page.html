@@ -22,7 +22,10 @@
           <app-order-card [cardData]="data" (onBtnClick)="confirmOrder($event)" />
         }
       } @else {
-        <p-message severity="info">O usuário não possui pedidos de inscrição</p-message>
+        <app-warning-message
+          message="O usuário não possui pedidos de inscrição que possam ser confirmados
+          manualmente"
+        />
       }
     </div>
   }

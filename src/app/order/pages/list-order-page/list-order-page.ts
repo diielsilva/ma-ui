@@ -2,11 +2,11 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { MessageService, ToastMessageOptions } from 'primeng/api';
 import { DialogModule } from 'primeng/dialog';
-import { MessageModule } from 'primeng/message';
 import { take } from 'rxjs';
 import { EnrollmentService } from '../../../enrollment/services/enrollment-service';
 import { PageCard } from '../../../shared/components/page-card/page-card';
 import { RefreshPageButton } from '../../../shared/components/refresh-page-button/refresh-page-button';
+import { WarningMessage } from '../../../shared/components/warning-message/warning-message';
 import { OrderCard } from '../../components/order-card/order-card';
 import { OrderCardMapper } from '../../mappers/order-card-mapper';
 import { OrderService } from '../../services/order-service';
@@ -18,7 +18,7 @@ import { ListOrderPageState } from './list-order-page-state';
 
 @Component({
   selector: 'app-list-session-owner-order-page',
-  imports: [ClipboardModule, DialogModule, MessageModule, OrderCard, PageCard, RefreshPageButton],
+  imports: [ClipboardModule, DialogModule, OrderCard, PageCard, RefreshPageButton, WarningMessage],
   templateUrl: './list-order-page.html',
   styleUrl: './list-order-page.css',
 })

@@ -5,11 +5,12 @@ import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { InputTextModule } from 'primeng/inputtext';
-import { MessageModule } from 'primeng/message';
 import { take } from 'rxjs';
 import { EnrollmentService } from '../../../enrollment/services/enrollment-service';
+import { SessionService } from '../../../security/services/session-service';
 import { FormFieldErrorMessage } from '../../../shared/components/form-field-error-message/form-field-error-message';
 import { PageCard } from '../../../shared/components/page-card/page-card';
+import { WarningMessage } from '../../../shared/components/warning-message/warning-message';
 import { unsignedIntegerSequence } from '../../../user/validators/unsigned-integer-sequence';
 import { OrderCard } from '../../components/order-card/order-card';
 import { searchOrderFormErrors } from '../../constants/search-order-form-errors';
@@ -21,7 +22,6 @@ import { PaymentMethod } from '../../types/payment-method';
 import { SearchOrderForm } from '../../types/search-order-form';
 import { forbiddenCpf } from '../../validators/forbidden-cpf';
 import { SearchOrderPageState } from './search-order-page-state';
-import { SessionService } from '../../../security/services/session-service';
 
 @Component({
   selector: 'app-search-order-page',
@@ -34,7 +34,7 @@ import { SessionService } from '../../../security/services/session-service';
     IftaLabelModule,
     DividerModule,
     OrderCard,
-    MessageModule,
+    WarningMessage,
   ],
   templateUrl: './search-order-page.html',
   styleUrl: './search-order-page.css',
