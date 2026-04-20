@@ -19,7 +19,9 @@ import { OrderCardData } from '../../types/order-card-data';
 import { OrderStatus } from '../../types/order-status';
 import { PaymentMethod } from '../../types/payment-method';
 import { SearchOrderForm } from '../../types/search-order-form';
+import { forbiddenCpf } from '../../validators/forbidden-cpf';
 import { SearchOrderPageState } from './search-order-page-state';
+import { SessionService } from '../../../security/services/session-service';
 
 @Component({
   selector: 'app-search-order-page',
@@ -37,10 +39,11 @@ import { SearchOrderPageState } from './search-order-page-state';
   templateUrl: './search-order-page.html',
   styleUrl: './search-order-page.css',
 })
-export class SearchByUserCpfPage {
+export class SearchOrderPage {
   private formBuilder = inject(NonNullableFormBuilder);
   private orderService = inject(OrderService);
   private enrollmentService = inject(EnrollmentService);
+  private sessionService = inject(SessionService);
   private messageService = inject(MessageService);
 
   protected state = signal(SearchOrderPageState.INITIAL);
@@ -52,6 +55,7 @@ export class SearchByUserCpfPage {
       Validators.minLength(11),
       Validators.maxLength(11),
       unsignedIntegerSequence(),
+      forbiddenCpf(this.sessionService.sessionOwnerIdentifier),
     ]),
   });
 
