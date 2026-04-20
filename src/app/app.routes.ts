@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { ListOrderPage } from './order/pages/list-order-page/list-order-page';
 import { CreateOrderPage } from './order/pages/create-order-page/create-order-page';
-import { SearchByUserCpfPage } from './order/pages/search-order-page/search-order-page';
+import { ListOrderPage } from './order/pages/list-order-page/list-order-page';
+import { SearchOrderPage } from './order/pages/search-order-page/search-order-page';
 import { adminSessionGuard } from './security/guards/admin-session-guard';
 import { authorizationGuard } from './security/guards/authorization-guard';
 import { sessionDestroyerGuard } from './security/guards/session-destroyer-guard';
@@ -25,7 +25,7 @@ export const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', component: ListOrderPage },
       { path: 'create', component: CreateOrderPage },
-      { path: 'search', component: SearchByUserCpfPage, canActivate: [adminSessionGuard] },
+      { path: 'search', component: SearchOrderPage, canActivate: [adminSessionGuard] },
     ],
     canActivate: [authorizationGuard],
   },

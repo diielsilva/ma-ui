@@ -1,4 +1,4 @@
-export const searchOrderFormErrors = {
+export const SEARCH_ORDER_FORM_ERRORS = Object.freeze({
   cpf: {
     errors: ['required', 'minlength', 'maxlength', 'unsignedIntegerSequence', 'forbiddenCpf'],
     messages: [
@@ -9,4 +9,4 @@ export const searchOrderFormErrors = {
       'Para acessar seus pedidos de inscrição, dirija-se a página Meus Pedidos',
     ],
   },
-};
+});
