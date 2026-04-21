@@ -4,6 +4,7 @@ export const ROUTES = Object.freeze({
   },
   users: {
     create: '/users/create',
+    update: '/users/update'
   },
   orders: {
     create: '/orders/create',
