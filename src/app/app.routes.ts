@@ -7,17 +7,15 @@ import { authorizationGuard } from './security/guards/authorization-guard';
 import { sessionDestroyerGuard } from './security/guards/session-destroyer-guard';
 import { LoginPage } from './security/pages/login-page/login-page';
 import { CreateUserPage } from './user/pages/create-user-page/create-user-page';
+import { UpdateUserPage } from './user/pages/update-user-page/update-user-page';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'security/login' },
   {
     path: 'users',
     children: [
-      {
-        path: 'create',
-        component: CreateUserPage,
-        canActivate: [sessionDestroyerGuard],
-      },
+      { path: 'create', component: CreateUserPage, canActivate: [sessionDestroyerGuard] },
+      { path: 'update', component: UpdateUserPage, canActivate: [authorizationGuard] },
     ],
   },
   {

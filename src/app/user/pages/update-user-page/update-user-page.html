@@ -1,0 +1,118 @@
+<app-page-card cardTitle="Meu Perfil">
+  <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" pInputText formControlName="name" id="name" class="w-full" />
+        <label for="name">Nome</label>
+      </p-iftalabel>
+
+      <app-form-field-error-message
+        [field]="updateUserForm.controls.name"
+        [errors]="updateUserFormErrors().name.errors"
+        [messages]="updateUserFormErrors().name.messages"
+      />
+    </div>
+
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="email" pInputText formControlName="email" id="email" class="w-full" />
+        <label for="email">Email</label>
+      </p-iftalabel>
+
+      <app-form-field-error-message
+        [field]="updateUserForm.controls.email"
+        [errors]="updateUserFormErrors().email.errors"
+        [messages]="updateUserFormErrors().email.messages"
+      />
+    </div>
+
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="password" pInputText formControlName="password" id="password" class="w-full" />
+        <label for="password">Senha</label>
+      </p-iftalabel>
+
+      <app-form-field-error-message
+        [field]="updateUserForm.controls.password"
+        [errors]="updateUserFormErrors().password.errors"
+        [messages]="updateUserFormErrors().password.messages"
+      />
+    </div>
+
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" pInputText formControlName="cpf" id="cpf" class="w-full" />
+        <label for="cpf">CPF</label>
+        <small class="italic">O CPF deve conter apenas números.</small>
+      </p-iftalabel>
+
+      <app-form-field-error-message
+        [field]="updateUserForm.controls.cpf"
+        [errors]="updateUserFormErrors().cpf.errors"
+        [messages]="updateUserFormErrors().cpf.messages"
+      />
+    </div>
+
+    <div class="mb-2">
+      <p-iftalabel>
+        <input type="text" pInputText formControlName="phone" id="phone" class="w-full" />
+        <label for="phone">Telefone</label>
+        <small class="italic">O telefone deve conter apenas números.</small>
+      </p-iftalabel>
+
+      <app-form-field-error-message
+        [field]="updateUserForm.controls.phone"
+        [errors]="updateUserFormErrors().phone.errors"
+        [messages]="updateUserFormErrors().phone.messages"
+      />
+    </div>
+
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-select formControlName="gender" [options]="genders" class="w-full" id="gender" />
+        <label for="gender">Sexo</label>
+      </p-iftalabel>
+
+      <app-form-field-error-message
+        [field]="updateUserForm.controls.gender"
+        [errors]="updateUserFormErrors().gender.errors"
+        [messages]="updateUserFormErrors().gender.messages"
+      />
+    </div>
+
+    <div class="mb-2">
+      <p-iftalabel>
+        <p-datepicker
+          class="w-full"
+          formControlName="birthDate"
+          id="birth-date"
+          dateFormat="dd/mm/yy"
+        />
+        <label for="birth-date">Data de Nascimento</label>
+      </p-iftalabel>
+
+      <app-form-field-error-message
+        [field]="updateUserForm.controls.birthDate"
+        [errors]="updateUserFormErrors().birthDate.errors"
+        [messages]="updateUserFormErrors().birthDate.messages"
+      />
+    </div>
+
+    <div class="mb-2">
+      <p-iftalabel>
+        <textarea
+          class="w-full min-h-50"
+          formControlName="disabilities"
+          pTextarea
+          id="disabilities"
+        ></textarea>
+        <label for="disabilities">Restrições</label>
+        <small class="italic">Preencher caso haja alguma restrição de saúde.</small>
+      </p-iftalabel>
+    </div>
+
+    <button type="submit" [disabled]="updateUserForm.invalid" pButton class="w-full">
+      Atualizar Perfil
+    </button>
+  </form>
+</app-page-card>

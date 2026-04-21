@@ -1,3 +1,4 @@
+import { Gender } from '../../user/types/gender';
 import { Role } from '../../user/types/role';
 
 export interface LoginResponseData {
@@ -5,7 +6,7 @@ export interface LoginResponseData {
   email: string;
   cpf: string;
   phone: string;
-  gender: string;
+  gender: Gender;
   role: Role;
   birthDate: Date;
   disabilities: string;

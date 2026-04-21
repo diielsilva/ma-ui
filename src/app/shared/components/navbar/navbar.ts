@@ -34,11 +34,8 @@ export class Navbar implements OnInit {
           { label: 'Pesquisar Pedidos', routerLink: ROUTES.orders.search },
         ],
       },
-      {
-        label: 'Sair',
-        icon: 'pi pi-sign-out',
-        routerLink: ROUTES.security.login,
-      },
+      { label: 'Perfil', icon: 'pi pi-user', routerLink: ROUTES.users.update },
+      { label: 'Sair', icon: 'pi pi-sign-out', routerLink: ROUTES.security.login },
     ];
   }
 
@@ -52,6 +49,7 @@ export class Navbar implements OnInit {
           { label: 'Meus Pedidos', routerLink: ROUTES.orders.list },
         ],
       },
+      { label: 'Perfil', icon: 'pi pi-user', routerLink: ROUTES.users.update },
       {
         label: 'Sair',
         icon: 'pi pi-sign-out',
