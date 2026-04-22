@@ -1,0 +1,9 @@
+<app-page-card cardTitle="Minhas Inscrições">
+  @if (pageState() == 1 && enrollmentCards().length === 0) {
+    <app-warning-message message="Você não possui inscrições registradas" />
+  } @else if (pageState() === 1 && enrollmentCards().length > 0) {
+    @for (cardData of enrollmentCards(); track $index) {
+      <app-enrollment-card [cardData]="cardData" />
+    }
+  }
+</app-page-card>

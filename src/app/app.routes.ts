@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { ListUserEnrollmentsPage } from './enrollment/pages/list-user-enrollments-page/list-user-enrollments-page';
 import { CreateOrderPage } from './order/pages/create-order-page/create-order-page';
 import { ListOrderPage } from './order/pages/list-order-page/list-order-page';
 import { SearchOrderPage } from './order/pages/search-order-page/search-order-page';
@@ -25,6 +26,11 @@ export const routes: Routes = [
       { path: 'create', component: CreateOrderPage },
       { path: 'search', component: SearchOrderPage, canActivate: [adminSessionGuard] },
     ],
+    canActivate: [authorizationGuard],
+  },
+  {
+    path: 'enrollments',
+    children: [{ path: '', pathMatch: 'full', component: ListUserEnrollmentsPage }],
     canActivate: [authorizationGuard],
   },
   {

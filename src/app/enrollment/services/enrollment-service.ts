@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { Enrollment } from '../types/enrollment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,5 +12,9 @@ export class EnrollmentService {
 
   create(orderId: number) {
     return this.httpClient.post<void>(`${this.url}/${orderId}/confirm/manual`, null);
+  }
+
+  findAllBelongningToSessionOwner() {
+    return this.httpClient.get<Enrollment[]>(this.url);
   }
 }
