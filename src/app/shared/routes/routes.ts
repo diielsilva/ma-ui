@@ -11,4 +11,7 @@ export const ROUTES = Object.freeze({
     list: '/orders',
     search: '/orders/search',
   },
+  enrollments: {
+    list: '/enrollments'
+  }
 });
