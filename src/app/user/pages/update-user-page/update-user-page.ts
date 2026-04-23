@@ -56,6 +56,11 @@ export class UpdateUserPage implements OnInit {
     const sessionOwner = this.sessionService.getSessionOwner();
     const gender = sessionOwner.gender === Gender.MALE ? this.genders[0] : this.genders[1];
     const disabilities = sessionOwner.disabilities === undefined ? '' : sessionOwner.disabilities!;
+    const threeHoursInMs = 10800000;
+    const birthDateContainingTimezone = new Date(sessionOwner.birthDate);
+    const birthDateIgnoringTimezone = new Date(
+      birthDateContainingTimezone.valueOf() + threeHoursInMs,
+    );
 
     this.updateUserForm = this.formBuilder.group({
       name: this.formBuilder.control(sessionOwner.name, [
@@ -77,7 +82,7 @@ export class UpdateUserPage implements OnInit {
         unsignedIntegerSequence(),
       ]),
       gender: this.formBuilder.control(gender, [Validators.required]),
-      birthDate: this.formBuilder.control(new Date(sessionOwner.birthDate), [
+      birthDate: this.formBuilder.control(birthDateIgnoringTimezone, [
         Validators.required,
         hasAgeToEnroll(),
       ]),

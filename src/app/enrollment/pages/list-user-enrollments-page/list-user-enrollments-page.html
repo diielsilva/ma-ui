@@ -6,4 +6,9 @@
       <app-enrollment-card [cardData]="cardData" />
     }
   }
+  <app-refresh-page-button
+    btnText="Recarregar Minhas Inscrições"
+    [isBtnDisabled]="false"
+    (refreshPage)="findAllEnrollmentsOfTheSessionOwner()"
+  />
 </app-page-card>

@@ -9,10 +9,11 @@ import { Enrollment } from '../../types/enrollment';
 import { EnrollmentCardData } from '../../types/enrollment-card-data';
 import { EnrollmentType } from '../../types/enrollment-type';
 import { ListUserEnrollmentsPageState } from './list-user-enrollments-page-state';
+import { RefreshPageButton } from '../../../shared/components/refresh-page-button/refresh-page-button';
 
 @Component({
   selector: 'app-list-user-enrollments-page',
-  imports: [EnrollmentCard, PageCard, WarningMessage],
+  imports: [EnrollmentCard, PageCard, RefreshPageButton, WarningMessage],
   templateUrl: './list-user-enrollments-page.html',
   styleUrl: './list-user-enrollments-page.css',
 })
