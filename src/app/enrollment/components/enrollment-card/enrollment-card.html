@@ -2,18 +2,17 @@
 
 <p-panel>
   <ul>
-    <li><span>Nº da Inscrição: </span> {{ enrollment.id }}</li>
+    <li><span class="font-semibold mr-2">Nº da Inscrição: </span> {{ enrollment.id }}</li>
 
-    <li><span>Participante: </span> {{ enrollment.name }}</li>
+    <li><span class="font-semibold mr-2">Participante: </span> {{ enrollment.name }}</li>
 
-    <li><span>CPF do Participate: </span> {{ enrollment.cpf }}</li>
+    <li><span class="font-semibold mr-2">CPF: </span> {{ enrollment.cpf | cpf }}</li>
 
-    <li><span>Telefone do Participante: </span>{{ enrollment.phone }}</li>
+    <li><span class="font-semibold mr-2">Telefone: </span>{{ enrollment.phone | phone }}</li>
 
-    <li><span>Valor Pago: R$ </span>{{ enrollment.value }}</li>
+    <li><span class="font-semibold mr-2">Valor Pago:</span>R$ {{ enrollment.value }}</li>
 
-    <li><span>Pago Com: </span> {{ enrollment.type }}</li>
-    <li><span>Inscrito Em: </span> {{ enrollment.createdAt | date }}</li>
+    <li><span class="font-semibold mr-2">Inscrito Em: </span> {{ enrollment.createdAt | date }}</li>
   </ul>
 
   @if (cardData().isBtnVisible) {
