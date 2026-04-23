@@ -16,10 +16,7 @@
         >{{ order.status | orderStatus }}</span
       >
     </li>
-    <li>
-      <span class="font-semibold mr-2">Expira Em:</span
-      >{{ order.dueDate | date: 'dd/MM/yyyy hh:mm' }}
-    </li>
+    <li><span class="font-semibold mr-2">Expira Em:</span>{{ order.dueDate | date }}</li>
     <li>
       <span class="font-semibold mr-2">Valor:</span>
       R$ {{ order.value }}

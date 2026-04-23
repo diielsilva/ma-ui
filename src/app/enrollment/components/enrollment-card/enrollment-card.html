@@ -13,7 +13,7 @@
     <li><span>Valor Pago: R$ </span>{{ enrollment.value }}</li>
 
     <li><span>Pago Com: </span> {{ enrollment.type }}</li>
-    <li><span>Inscrito Em: </span> {{ enrollment.createdAt | date: 'dd/MM/yyyy hh:mm' }}</li>
+    <li><span>Inscrito Em: </span> {{ enrollment.createdAt | date }}</li>
   </ul>
 
   @if (cardData().isBtnVisible) {
