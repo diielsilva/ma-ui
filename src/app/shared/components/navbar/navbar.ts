@@ -37,7 +37,10 @@ export class Navbar implements OnInit {
       {
         label: 'Inscrições',
         icon: 'pi pi-flag',
-        items: [{ label: 'Minhas Inscrições', routerLink: ROUTES.enrollments.list }],
+        items: [
+          { label: 'Minhas Inscrições', routerLink: ROUTES.enrollments.list },
+          { label: 'Ver Todas', routerLink: '/enrollments/all' },
+        ],
       },
       { label: 'Perfil', icon: 'pi pi-user', routerLink: ROUTES.users.update },
       { label: 'Sair', icon: 'pi pi-sign-out', routerLink: ROUTES.security.login },

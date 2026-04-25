@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { Page } from '../../shared/types/page';
 import { Enrollment } from '../types/enrollment';
 
 @Injectable({
@@ -16,5 +17,9 @@ export class EnrollmentService {
 
   findAllBelongningToSessionOwner() {
     return this.httpClient.get<Enrollment[]>(this.url);
+  }
+
+  findAll(page: number) {
+    return this.httpClient.get<Page<Enrollment>>(`${this.url}/all?page=${page - 1}`);
   }
 }

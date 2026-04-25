@@ -1,0 +1,23 @@
+<app-page-card cardTitle="Lista de Inscritos">
+  @if (pageState() === 1) {
+    @if (enrollmentsPage().content.length === 0) {
+      <app-warning-message message="Ainda não há inscritos no evento" />
+
+      <app-refresh-page-button
+        btnText="Recarregar Inscrições"
+        [isBtnDisabled]="false"
+        (refreshPage)="findAllEnrollments()"
+      />
+    } @else {
+      <h2 class="mb-2 mt-2">Total de Inscritos: {{ enrollmentsPage().totalElements }}</h2>
+      @for (cardData of enrollmentsPage().content; track $index) {
+        <app-enrollment-card [cardData]="cardData" />
+      }
+    }
+  }
+  <p-paginator
+    [rows]="20"
+    [totalRecords]="enrollmentsPage().totalElements"
+    (onPageChange)="handlePageChange($event)"
+  />
+</app-page-card>
